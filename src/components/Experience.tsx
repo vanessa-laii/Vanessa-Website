@@ -8,11 +8,23 @@ interface TimelineEntry {
   tech: string[];
   description: string;
   links?: { label: string; url: string }[];
-  gradient: string;
+  src: string;
+  type?: "image" | "video";
+  contained?: boolean;
   tagClass: string;
 }
 
 const timeline: TimelineEntry[] = [
+  {
+    year: "Current",
+    title: "NLP Research Assistant",
+    organization: "McMaster University",
+    tech: ["NLP", "Machine Learning","Python", "Hugging Face"],
+    description: "NLP Research Assistant for the McMaster Engineering Department",
+    src: "/mcmaster-enginering.png",
+    type: "image",
+    tagClass: "bg-sky-light text-sky-600 border-sky",
+  },
   {
     year: "2025",
     title: "Software Engineer Intern",
@@ -20,8 +32,19 @@ const timeline: TimelineEntry[] = [
     tech: ["TypeScript", "Python", "OpenTelemetry", "Dynatrace", "Backstage", "Ansible"],
     description:
       "12-month co-op on Innovation & Technology DevOps, implementing Site Reliability Practices for 30+ services and improving developer productivity across all lines of business.",
-    gradient: "linear-gradient(145deg, #a78bfa 0%, #7c3aed 45%, #3b0764 100%)",
+    src: "/rbc.png",
+    type: "image",
     tagClass: "bg-lavender-light text-lavender-dark border-lavender",
+  },
+  {
+    year: "2024-2026",
+    title: "McMaster Teaching Assistant",
+    organization: "McMaster University",
+    tech: ["Java", "C", "Linux/Unix", "OOP", "Debuggers"],
+    description: "Object Oriented Programming (OOP), Computer Science Development Basics",
+    src: "/mcmaster.png",
+    type: "image",
+    tagClass: "bg-rose-light text-rose-600 border-rose",
   },
   {
     year: "2024",
@@ -34,19 +57,8 @@ const timeline: TimelineEntry[] = [
       { label: "Wiki", url: "https://2024.igem.wiki/mcmaster-canada/" },
       { label: "Team Site", url: "https://www.mcmaster-igem.ca/" },
     ],
-    gradient: "linear-gradient(145deg, #6ee7b7 0%, #22c55e 45%, #14532d 100%)",
+    src: "/IGEM.png",
     tagClass: "bg-mint-light text-green-700 border-mint",
-  },
-  {
-    year: "2023",
-    title: "DeltaHacks — 1st Place RBC Prize",
-    organization: "Hackathon",
-    tech: ["Figma", "JavaScript", "HTML/CSS", "Python", "Firebase", "SQL"],
-    description:
-      "Led front-end and UI/UX design for BizConnect, a small business partnership platform. Won 1st place for the RBC Sponsorship prize.",
-    links: [{ label: "DevPost", url: "https://devpost.com/software/rbc-bizconnect" }],
-    gradient: "linear-gradient(145deg, #fda4af 0%, #e11d48 45%, #881337 100%)",
-    tagClass: "bg-rose-light text-rose-600 border-rose",
   },
 ];
 
@@ -72,12 +84,26 @@ function ExpCard({ entry, delay }: { entry: TimelineEntry; delay: number }) {
       onMouseLeave={() => setExpanded(false)}
       onClick={handleClick}
     >
-      {/* ── Image — square, no rounded corners ── */}
-      <div className="aspect-square overflow-hidden">
-        <div
-          className="w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-          style={{ background: entry.gradient }}
-        />
+      {/* ── Media — square, no rounded corners ── */}
+      <div className="aspect-square overflow-hidden shadow-[0_4px_64px_rgba(0,0,0,0.05),0_1px_16px_rgba(0,0,0,0.03)] transition-shadow duration-300 group-hover:shadow-[0_8px_80px_rgba(0,0,0,0.08),0_2px_24px_rgba(0,0,0,0.04)]">
+        {entry.type === "video" ? (
+          <div className={`w-full h-full flex items-center justify-center${entry.contained ? " bg-white p-12" : ""}`}>
+            <video
+              src={entry.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={entry.contained ? "w-[60%] object-contain" : "w-full h-full object-cover"}
+            />
+          </div>
+        ) : (
+          <img
+            src={entry.src}
+            alt={entry.title}
+            className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+          />
+        )}
       </div>
 
       {/* ── Caption row — always visible below the image ── */}
