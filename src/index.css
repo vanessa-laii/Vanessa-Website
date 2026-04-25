@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #faf9f7;
+  --color-bg-elevated: #ffffff;
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #4a4a68;
+  --color-text-muted: #8888a0;
+
+  --color-lavender: #c4b5fd;
+  --color-lavender-light: #ede9fe;
+  --color-lavender-dark: #7c3aed;
+
+  --color-rose: #fda4af;
+  --color-rose-light: #ffe4e6;
+
+  --color-mint: #86efac;
+  --color-mint-light: #dcfce7;
+
+  --color-sky: #7dd3fc;
+  --color-sky-light: #e0f2fe;
+
+  --color-peach: #fdba74;
+  --color-peach-light: #fff7ed;
+
+  --color-border: #e8e6e1;
+  --color-border-hover: #d4d0c8;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", ui-serif, Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><text x='8' y='22' font-size='25'>❀</text></svg>") 16 16,
+    auto;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-lavender);
+  color: var(--color-text-primary);
+}
+
+@keyframes videoShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
