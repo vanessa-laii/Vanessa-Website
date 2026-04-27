@@ -87,7 +87,6 @@ export default function Navbar() {
                     href={s.href}
                     target={s.href.startsWith("mailto") ? undefined : "_blank"}
                     rel="noopener noreferrer"
-                    download={s.label === "Resume" ? true : undefined}
                     aria-label={s.label}
                     className="text-text-muted transition-all duration-200 hover:text-lavender-dark hover:scale-110"
                   >
