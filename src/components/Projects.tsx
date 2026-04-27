@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import { GithubIcon } from "./Icons";
+import { GithubIcon, DevpostIcon } from "./Icons";
 
 interface Project {
   title: string;
   description: string;
   tech: string[];
-  github: string;
+  github?: string;
+  devpost?: string;
   demo?: string;
+  videoSrc?: string;
+  imageSrc?: string;
   gradient: string;
   shimmer: string;
   tagColor: string;
@@ -16,51 +19,55 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "BizConnect",
+    title: "SCEMAS",
     description:
-      "A comprehensive business networking platform connecting small businesses with potential partners, featuring real-time chat, matching algorithms, and analytics dashboards.",
-    tech: ["React", "Node.js", "MongoDB", "Express", "Socket.io", "JWT"],
-    github: "https://github.com/vanessa-laii/bizconnect",
-    demo: "https://bizconnect-demo.vercel.app",
-    gradient: "linear-gradient(145deg, #c4b5fd 0%, #7c3aed 55%, #4c1d95 100%)",
-    shimmer:
-      "linear-gradient(135deg, #a78bfa 0%, #6d28d9 25%, #4c1d95 50%, #7c3aed 75%, #a78bfa 100%)",
-    tagColor: "bg-lavender-light text-lavender-dark border-lavender",
-  },
-  {
-    title: "iGEM Platform",
-    description:
-      "An interactive platform for the International Genetically Engineered Machine competition, showcasing team research, documentation, and achievements.",
-    tech: ["Next.js", "TypeScript", "Tailwind", "Prisma", "PostgreSQL"],
-    github: "https://github.com/vanessa-laii/igem-platform",
-    demo: "https://igem-platform.vercel.app",
-    gradient: "linear-gradient(145deg, #86efac 0%, #22c55e 55%, #15803d 100%)",
-    shimmer:
-      "linear-gradient(135deg, #4ade80 0%, #16a34a 25%, #15803d 50%, #22c55e 75%, #4ade80 100%)",
-    tagColor: "bg-mint-light text-green-700 border-mint",
-  },
-  {
-    title: "MacWater Analytics",
-    description:
-      "A water quality monitoring and analytics dashboard for McMaster University with interactive visualizations and data-driven insights.",
-    tech: ["Vue.js", "Python", "Flask", "D3.js", "SQLite", "Chart.js"],
-    github: "https://github.com/vanessa-laii/macwater-analytics",
+      "A real-time urban environmental monitoring system built on a PAC architecture, featuring an operator dashboard with live sensor data aggregation and zone-based alerts, role-based access for administrators, a public REST API exposing non-sensitive city-zone data, and a companion mobile app. Implements audit logging and rate-limiting to ensure accountability and high uptime.",
+    tech: ["PAC Architecture", "React", "TypeScript", "Electron", "React Native", "Expo", "FastAPI", "Python", "Supabase", "Docker", "Leaflet"],
+    github: "https://github.com/vanessa-laii/SCEMAS",
+    demo: "https://3a04t01group4.vercel.app/login",
+    videoSrc: "/SCEMAS.mp4",
     gradient: "linear-gradient(145deg, #7dd3fc 0%, #0ea5e9 55%, #0284c7 100%)",
     shimmer:
       "linear-gradient(135deg, #38bdf8 0%, #0284c7 25%, #0369a1 50%, #0ea5e9 75%, #38bdf8 100%)",
     tagColor: "bg-sky-light text-blue-700 border-sky",
   },
   {
-    title: "Spotify Music Analyzer",
+    title: "MindFill • DeltaHacks XII",
     description:
-      "A music analytics application that connects to Spotify API to visualize listening habits, top tracks, and personalized audio feature breakdowns.",
-    tech: ["React", "Spotify API", "Node.js", "Express", "Chart.js", "OAuth"],
-    github: "https://github.com/vanessa-laii/spotify-analyzer",
-    demo: "https://spotify-analyzer-demo.netlify.app",
+      "An AI-driven therapeutic web colouring book that transforms personal photos into adaptive colouring templates using computer vision for edge detection. Features real-time biometric analysis tracking mouse movements and page interactions to monitor common dementia symptoms for clinical reporting.",
+    tech: ["image-js", "Gemini API 1.5 Pro", "OpenCV.js", "Supabase", "Next.js", "TypeScript"],
+    github: "https://github.com/vanessa-laii/MindFill",
+    demo: "https://mind-fill.vercel.app/",
+    videoSrc: "/MindFill-Video.mp4",
+    gradient: "linear-gradient(145deg, #86efac 0%, #22c55e 55%, #15803d 100%)",
+    shimmer:
+      "linear-gradient(135deg, #4ade80 0%, #16a34a 25%, #15803d 50%, #22c55e 75%, #4ade80 100%)",
+    tagColor: "bg-mint-light text-green-700 border-mint",
+  },
+  {
+    title: "Image Processing Neural Network",
+    description:
+      "Full-stack interactive showcase of two CNNs trained on the SVHN dataset — a digit classifier (82.1% test accuracy) and an encoder-decoder image denoiser (MSE 0.0088). Features drag-and-drop live inference, interactive training charts, and a layer-by-layer architecture viewer.",
+    tech: ["PyTorch", "FastAPI", "React", "Python", "Chart.js", "Vite"],
+    github: "https://github.com/vanessa-laii/Image-Processing-with-NN",
+    videoSrc: "/ImageProcessor.mp4",
     gradient: "linear-gradient(145deg, #fdba74 0%, #f97316 55%, #ea580c 100%)",
     shimmer:
       "linear-gradient(135deg, #fb923c 0%, #ea580c 25%, #c2410c 50%, #f97316 75%, #fb923c 100%)",
     tagColor: "bg-peach-light text-orange-700 border-peach",
+  },
+  {
+    title: "BizConnect • 1st Place @ DeltaHacks IX",
+    description:
+      "A comprehensive business networking platform connecting small businesses with potential partners, featuring real-time chat, matching algorithms, and analytics dashboards.",
+    tech: ["React", "Node.js", "MongoDB", "Express", "Figma"],
+    devpost: "https://devpost.com/software/rbc-bizconnect",
+    demo: "https://bizconnect-demo.vercel.app",
+    imageSrc: "/BizConnect.jpg",
+    gradient: "linear-gradient(145deg, #c4b5fd 0%, #7c3aed 55%, #4c1d95 100%)",
+    shimmer:
+      "linear-gradient(135deg, #a78bfa 0%, #6d28d9 25%, #4c1d95 50%, #7c3aed 75%, #a78bfa 100%)",
+    tagColor: "bg-lavender-light text-lavender-dark border-lavender",
   },
 ];
 
@@ -74,6 +81,26 @@ function ProjectCard({
   index: number;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <motion.div
@@ -82,79 +109,92 @@ function ProjectCard({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
     >
-      {/* ── Square image — no rounded corners ── */}
-      <div className="group aspect-square overflow-hidden relative">
-        {/* Gradient fill */}
-        <div
-          className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-          style={{ background: project.gradient }}
-        />
+      {/* ── Wide media — 16:9, no rounded corners ── */}
+      <div className="group aspect-video overflow-hidden relative">
+        {project.videoSrc ? (
+          <video
+            ref={videoRef}
+            src={project.videoSrc}
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        ) : project.imageSrc ? (
+          <img
+            src={project.imageSrc}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+          />
+        ) : (
+          <>
+            {/* Gradient fill */}
+            <div
+              className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+              style={{ background: project.gradient }}
+            />
 
-        {/* Video shimmer on hover */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: project.shimmer,
-            backgroundSize: "200% 200%",
-            animation: "videoShimmer 3s ease infinite",
-          }}
-        />
+            {/* Shimmer on hover */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{
+                background: project.shimmer,
+                backgroundSize: "200% 200%",
+                animation: "videoShimmer 3s ease infinite",
+              }}
+            />
 
-        {/* Play badge on hover */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/25 flex items-center justify-center scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 ease-out">
-            <svg
-              width={20}
-              height={20}
-              viewBox="0 0 24 24"
-              fill="white"
-              className="ml-0.5"
-              aria-hidden="true"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
+            {/* Play badge on hover */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/25 flex items-center justify-center scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 ease-out">
+                <svg width={20} height={20} viewBox="0 0 24 24" fill="white" className="ml-0.5" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* ── Caption + details ── */}
+      <div>
+        <div className="flex items-baseline justify-between gap-4 mt-3">
+          <h3 className="text-sm font-medium text-text-primary">
+            {project.title}
+          </h3>
+          <span className="text-[11px] font-medium text-text-muted uppercase tracking-widest shrink-0">
+            {project.tech[0]} · {project.tech[1]}
+          </span>
         </div>
-      </div>
 
-      {/* ── Caption row — always visible ── */}
-      <div className="flex items-baseline justify-between gap-4 mt-3">
-        <h3 className="text-sm font-medium text-text-primary">
-          {project.title}
-        </h3>
-        <span className="text-[11px] font-medium text-text-muted uppercase tracking-widest shrink-0">
-          {project.tech[0]} · {project.tech[1]}
-        </span>
-      </div>
-
-      {/* ── Toggle button ── */}
-      <button
-        onClick={() => setExpanded((p) => !p)}
-        className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-lavender-dark hover:text-text-primary transition-colors"
-        aria-expanded={expanded}
-      >
-        {expanded ? "Hide details" : "Learn more"}
-        <motion.span
-          animate={{ rotate: expanded ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="inline-block leading-none"
+        {/* ── Toggle button ── */}
+        <button
+          onClick={() => setExpanded((p) => !p)}
+          className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-lavender-dark hover:text-text-primary transition-colors"
+          aria-expanded={expanded}
         >
-          ↓
-        </motion.span>
-      </button>
+          {expanded ? "Hide details" : "Learn more"}
+          <motion.span
+            animate={{ rotate: expanded ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="inline-block leading-none"
+          >
+            ↓
+          </motion.span>
+        </button>
 
-      {/* ── Permanent details panel ── */}
-      <motion.div
-        animate={{
-          maxHeight: expanded ? 320 : 0,
-          opacity: expanded ? 1 : 0,
-        }}
-        transition={{
-          maxHeight: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-          opacity: { duration: 0.25, delay: expanded ? 0.1 : 0 },
-        }}
-        className="overflow-hidden"
-      >
+        {/* ── Permanent details panel ── */}
+        <motion.div
+          animate={{
+            maxHeight: expanded ? 320 : 0,
+            opacity: expanded ? 1 : 0,
+          }}
+          transition={{
+            maxHeight: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+            opacity: { duration: 0.25, delay: expanded ? 0.1 : 0 },
+          }}
+          className="overflow-hidden"
+        >
         <div className="pt-3 space-y-3">
           {/* Description */}
           <p className="text-xs text-text-secondary leading-relaxed">
@@ -175,15 +215,28 @@ function ProjectCard({
 
           {/* Links */}
           <div className="flex items-center gap-5 pt-0.5">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition-colors"
-            >
-              <GithubIcon size={13} />
-              Code
-            </a>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition-colors"
+              >
+                <GithubIcon size={13} />
+                Code
+              </a>
+            )}
+            {project.devpost && (
+              <a
+                href={project.devpost}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition-colors"
+              >
+                <DevpostIcon size={13} />
+                Devpost
+              </a>
+            )}
             {project.demo && (
               <a
                 href={project.demo}
@@ -197,7 +250,8 @@ function ProjectCard({
             )}
           </div>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
@@ -225,13 +279,13 @@ export default function Projects() {
             Things I've built
           </h2>
           <p className="mt-4 max-w-2xl text-text-secondary leading-relaxed">
-            A selection of projects spanning full-stack development, data
-            visualization, and developer tools.
+            A selection of projects spanning Hackathon Projects, Full-stack, Data
+            Visualization, and Machine Learning.
           </p>
         </motion.div>
 
-        {/* 2 × 2 gallery grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-10">
+        {/* Single-column full-width stack */}
+        <div className="flex flex-col gap-16">
           {projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}

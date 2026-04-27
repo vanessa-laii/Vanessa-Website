@@ -94,8 +94,7 @@ export default function Hero() {
               <Highlight color="mint">SRE</Highlight>.
             </p>
             <p className="text-text-muted text-base sm:text-lg">
-              Avid matcha drinker and coffee lover — when I'm not coding, you
-              can usually find me exploring cafes.
+              Avid matcha drinker and coffee lover based in Toronto, Canada.
             </p>
           </motion.div>
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Mail } from "lucide-react";
+import { Menu, X, Mail, FileText } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 
 const navLinks = [
@@ -25,6 +25,12 @@ const socials = [
     icon: Mail,
     href: "mailto:vanessa.sw.lai@gmail.com",
     label: "Email",
+    isLucide: true,
+  },
+  {
+    icon: FileText,
+    href: "/Vanessa_Lai_Resume.pdf",
+    label: "Resume",
     isLucide: true,
   },
 ];
@@ -81,6 +87,7 @@ export default function Navbar() {
                     href={s.href}
                     target={s.href.startsWith("mailto") ? undefined : "_blank"}
                     rel="noopener noreferrer"
+                    download={s.label === "Resume" ? true : undefined}
                     aria-label={s.label}
                     className="text-text-muted transition-all duration-200 hover:text-lavender-dark hover:scale-110"
                   >
@@ -143,6 +150,7 @@ export default function Navbar() {
                       s.href.startsWith("mailto") ? undefined : "_blank"
                     }
                     rel="noopener noreferrer"
+                    download={s.label === "Resume" ? true : undefined}
                     aria-label={s.label}
                     className="text-text-muted transition-colors hover:text-lavender-dark"
                   >
