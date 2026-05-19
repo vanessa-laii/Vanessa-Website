@@ -24,7 +24,7 @@ const projects: Project[] = [
       "A real-time urban environmental monitoring system built on a PAC architecture, featuring an operator dashboard with live sensor data aggregation and zone-based alerts, role-based access for administrators, a public REST API exposing non-sensitive city-zone data, and a companion mobile app. Implements audit logging and rate-limiting to ensure accountability and high uptime.",
     tech: ["PAC Architecture", "React", "TypeScript", "Electron", "React Native", "Expo", "FastAPI", "Python", "Supabase", "Docker", "Leaflet"],
     github: "https://github.com/vanessa-laii/SCEMAS",
-    demo: "https://3a04t01group4.vercel.app/login",
+    demo: "https://3a04t01group4.vercel.app",
     videoSrc: "/SCEMAS.mp4",
     gradient: "linear-gradient(145deg, #7dd3fc 0%, #0ea5e9 55%, #0284c7 100%)",
     shimmer:
