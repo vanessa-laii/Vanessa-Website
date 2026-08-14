@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { GithubIcon, DevpostIcon } from "./Icons";
@@ -22,7 +22,7 @@ const projects: Project[] = [
     title: "SCEMAS",
     description:
       "A real-time urban environmental monitoring system built on a PAC architecture, featuring an operator dashboard with live sensor data aggregation and zone-based alerts, role-based access for administrators, a public REST API exposing non-sensitive city-zone data, and a companion mobile app. Implements audit logging and rate-limiting to ensure accountability and high uptime.",
-    tech: ["PAC Architecture", "React", "TypeScript", "Electron", "React Native", "Expo", "FastAPI", "Python", "Supabase", "Docker", "Leaflet"],
+    tech: ["PAC Architecture", "Expo", "FastAPI", "Supabase", "Docker"],
     github: "https://github.com/vanessa-laii/SCEMAS",
     demo: "https://3a04t01group4.vercel.app",
     videoSrc: "/SCEMAS.mp4",
@@ -35,7 +35,7 @@ const projects: Project[] = [
     title: "MindFill • DeltaHacks XII",
     description:
       "An AI-driven therapeutic web colouring book that transforms personal photos into adaptive colouring templates using computer vision for edge detection. Features real-time biometric analysis tracking mouse movements and page interactions to monitor common dementia symptoms for clinical reporting.",
-    tech: ["image-js", "Gemini API 1.5 Pro", "OpenCV.js", "Supabase", "Next.js", "TypeScript"],
+    tech: ["image-js", "Gemini API 1.5 Pro", "OpenCV.js", "Supabase", "Next.js"],
     github: "https://github.com/vanessa-laii/MindFill",
     demo: "https://mind-fill.vercel.app/",
     videoSrc: "/MindFill-Video.mp4",
@@ -48,7 +48,7 @@ const projects: Project[] = [
     title: "Image Processing Neural Network",
     description:
       "Full-stack interactive showcase of two CNNs trained on the SVHN dataset — a digit classifier (82.1% test accuracy) and an encoder-decoder image denoiser (MSE 0.0088). Features drag-and-drop live inference, interactive training charts, and a layer-by-layer architecture viewer.",
-    tech: ["PyTorch", "FastAPI", "React", "Python", "Chart.js", "Vite"],
+    tech: ["PyTorch", "FastAPI", "React", "Python", "Vite"],
     github: "https://github.com/vanessa-laii/Image-Processing-with-NN",
     videoSrc: "/ImageProcessor.mp4",
     gradient: "linear-gradient(145deg, #fdba74 0%, #f97316 55%, #ea580c 100%)",
@@ -80,24 +80,18 @@ function ProjectCard({
   project: Project;
   index: number;
 }) {
-  const [expanded, setExpanded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     );
-
     observer.observe(video);
     return () => observer.disconnect();
   }, []);
@@ -108,9 +102,10 @@ function ProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: "easeOut" }}
+      className="group flex flex-col"
     >
-      {/* ── Wide media — 16:9, no rounded corners ── */}
-      <div className="group aspect-video overflow-hidden relative">
+      {/* ── Media ── */}
+      <div className="aspect-video overflow-hidden rounded-xl border border-border relative">
         {project.videoSrc ? (
           <video
             ref={videoRef}
@@ -124,17 +119,14 @@ function ProjectCard({
           <img
             src={project.imageSrc}
             alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+            className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
           />
         ) : (
           <>
-            {/* Gradient fill */}
             <div
-              className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+              className="absolute inset-0"
               style={{ background: project.gradient }}
             />
-
-            {/* Shimmer on hover */}
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
               style={{
@@ -143,114 +135,57 @@ function ProjectCard({
                 animation: "videoShimmer 3s ease infinite",
               }}
             />
-
-            {/* Play badge on hover */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/25 flex items-center justify-center scale-50 opacity-0 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300 ease-out">
-                <svg width={20} height={20} viewBox="0 0 24 24" fill="white" className="ml-0.5" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
           </>
         )}
       </div>
 
-      {/* ── Caption + details ── */}
-      <div>
-        <div className="flex items-baseline justify-between gap-4 mt-3">
-          <h3 className="text-sm font-medium text-text-primary">
+      {/* ── Info ── */}
+      <div className="mt-3 flex flex-col gap-2 flex-1">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-sm font-medium text-text-primary leading-snug">
             {project.title}
           </h3>
-          <span className="text-[11px] font-medium text-text-muted uppercase tracking-widest shrink-0">
-            {project.tech[0]} · {project.tech[1]}
-          </span>
-        </div>
-
-        {/* ── Toggle button ── */}
-        <button
-          onClick={() => setExpanded((p) => !p)}
-          className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-lavender-dark hover:text-text-primary transition-colors"
-          aria-expanded={expanded}
-        >
-          {expanded ? "Hide details" : "Learn more"}
-          <motion.span
-            animate={{ rotate: expanded ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="inline-block leading-none"
-          >
-            ↓
-          </motion.span>
-        </button>
-
-        {/* ── Permanent details panel ── */}
-        <motion.div
-          animate={{
-            maxHeight: expanded ? 320 : 0,
-            opacity: expanded ? 1 : 0,
-          }}
-          transition={{
-            maxHeight: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-            opacity: { duration: 0.25, delay: expanded ? 0.1 : 0 },
-          }}
-          className="overflow-hidden"
-        >
-        <div className="pt-3 space-y-3">
-          {/* Description */}
-          <p className="text-xs text-text-secondary leading-relaxed">
-            {project.description}
-          </p>
-
-          {/* Tech tags */}
-          <div className="flex flex-wrap gap-1.5">
-            {project.tech.map((t) => (
-              <span
-                key={t}
-                className={`text-[11px] font-medium border rounded-full px-2.5 py-0.5 ${project.tagColor}`}
-              >
-                {t}
-              </span>
-            ))}
-          </div>
-
-          {/* Links */}
-          <div className="flex items-center gap-5 pt-0.5">
+          <div className="flex items-center gap-3 shrink-0 mt-0.5">
             {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition-colors"
-              >
-                <GithubIcon size={13} />
-                Code
+              <a href={project.github} target="_blank" rel="noopener noreferrer"
+                className="text-text-muted hover:text-text-primary transition-colors">
+                <GithubIcon size={14} />
               </a>
             )}
             {project.devpost && (
-              <a
-                href={project.devpost}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-text-secondary hover:text-text-primary transition-colors"
-              >
-                <DevpostIcon size={13} />
-                Devpost
+              <a href={project.devpost} target="_blank" rel="noopener noreferrer"
+                className="text-text-muted hover:text-text-primary transition-colors">
+                <DevpostIcon size={14} />
               </a>
             )}
             {project.demo && (
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-lavender-dark hover:text-text-primary transition-colors"
-              >
-                <ExternalLink size={12} strokeWidth={2} />
-                Live demo
+              <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                className="text-text-muted hover:text-lavender-dark transition-colors">
+                <ExternalLink size={13} strokeWidth={2} />
               </a>
             )}
           </div>
         </div>
-        </motion.div>
+
+        <p className="text-xs text-text-secondary leading-relaxed line-clamp-3">
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mt-auto pt-1">
+          {project.tech.slice(0, 5).map((t) => (
+            <span
+              key={t}
+              className={`text-[11px] font-medium border rounded-full px-2.5 py-0.5 ${project.tagColor}`}
+            >
+              {t}
+            </span>
+          ))}
+          {project.tech.length > 5 && (
+            <span className="text-[11px] font-medium border rounded-full px-2.5 py-0.5 bg-bg-elevated border-border text-text-muted">
+              +{project.tech.length - 5}
+            </span>
+          )}
+        </div>
       </div>
     </motion.div>
   );
@@ -284,8 +219,8 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Single-column full-width stack */}
-        <div className="flex flex-col gap-16">
+        {/* 2-column grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
           {projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}

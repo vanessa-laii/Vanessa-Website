@@ -82,19 +82,17 @@ export default function Hero() {
           >
             <p>
               Software Engineering student at{" "}
-              <span className="font-medium text-text-primary">
-                McMaster University
-              </span>
+              <Highlight color="sky">McMaster University</Highlight>
               .
             </p>
             <p>
               Experienced in{" "}
-              <Highlight color="lavender">DevOps</Highlight>,{" "}
-              <Highlight color="rose">Full Stack Development</Highlight>, and{" "}
+              <Highlight color="lavender">NLP & Machine Learning</Highlight>,{" "}
+              <Highlight color="rose">DevOps</Highlight>, and{" "}
               <Highlight color="mint">SRE</Highlight>.
             </p>
             <p className="text-text-muted text-base sm:text-lg">
-              Avid matcha drinker and coffee lover based in Toronto, Canada.
+              Based in Toronto, Canada.
             </p>
           </motion.div>
 
@@ -144,7 +142,7 @@ export default function Hero() {
             />
             <StatusPill
               label="Looking for"
-              value="New Grad 2027"
+              value="New Grad Summer 2027"
             />
           </motion.div>
         </div>

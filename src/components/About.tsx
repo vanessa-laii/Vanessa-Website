@@ -9,18 +9,18 @@ const photos = [
 ];
 
 const interests = [
-  "Site Reliability Engineering",
+  "NLP & Machine Learning",
   "DevOps & Automation",
+  "Site Reliability Engineering",
   "UI/UX Design",
-  "Full Stack Dev",
-  "Human-Centred Tech",
+  "Backend Development",
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function About() {
   return (
-    <section id="about" className="relative py-24 w-full">
+    <section id="about" className="relative py-16 w-full">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="px-4 sm:px-6 lg:px-10">
@@ -44,13 +44,15 @@ export default function About() {
           transition={{ duration: 0.8, delay: 0.05, ease: "easeOut" }}
           className="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium leading-[1.3] tracking-tight text-text-primary max-w-4xl mb-16"
         >
-          I think deeply about systems, people, and reliable software. My focus
-          is on{" "}
+          In the past, I improved and automated internal workflows and infrastructure at {" "}
           <span className="text-lavender-dark">
-            automation and engineering that holds up under pressure
-          </span>{" "}
-          — invisible infrastructure that lets developers move faster and users
-          never notice the machinery behind the scenes.
+            RBC
+          </span>{""}
+          , designed an award winning website for {" "}
+          <span className="text-lavender-dark">
+            iGEM McMaster
+          </span>{""}
+          , and taught students computer science.{" "}
         </motion.p>
 
         {/* Two-column layout */}
@@ -121,30 +123,30 @@ export default function About() {
                 Hamilton, Ontario
               </div>
 
-              {/* Favourite spots — 3 columns */}
-              <div className="grid grid-cols-3 gap-2 w-fit">
+              
+              <div className="grid grid-cols-3 gap-2 w-fit ">
                 {[
                   {
-                    label: "Cafes",
+                    label: "Leadership Experience",
                     dot: "bg-lavender",
-                    items: ["One For All", "Synonym", "Phin coffee bar", "Detour Café", "Daigyo"],
+                    items: ["Engineering Ambassadors Co-Lead", "Women in Engineering Mentor", "McMaster Design League Exec", "Battery Workforce Challenge Member"],
                   },
                   {
-                    label: "Food Spots",
+                    label: "Teachine Experience",
                     dot: "bg-mint",
-                    items: ["BAB Korean", "Artie's", "Pinbones Fish Market", "Menya Kyu", "Sio Bento"],
+                    items: ["Object Oriented Programming", "Linux & C", "Git & Version Control", "Engineering Design"],
                   },
-                  {
-                    label: "Nature",
-                    dot: "bg-rose",
-                    items: ["Tiffany Falls", "Bayfront Park", "Gage Park", "Cootes Paradise", "Royal Botanical Gardens"],
-                  },
+                  // {
+                  //   label: "Interests",
+                  //   dot: "bg-rose",
+                  //   items: ["Tiffany Falls", "Bayfront Park", "Gage Park", "Cootes Paradise", "Royal Botanical Gardens"],
+                  // },
                 ].map((col) => (
                   <div
                     key={col.label}
                     className="border border-border rounded-xl p-3.5 bg-bg-elevated/60"
                   >
-                    <p className="text-[10px] font-semibold tracking-widest uppercase text-text-muted mb-2.5">
+                    <p className="text-[13px] font-semibold tracking-widest uppercase text-text-muted mb-2.5">
                       {col.label}
                     </p>
                     <ul className="space-y-1.5">
