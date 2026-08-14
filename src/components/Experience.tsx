@@ -16,11 +16,11 @@ interface TimelineEntry {
 
 const timeline: TimelineEntry[] = [
   {
-    year: "Current",
-    title: "NLP Research Assistant",
+    year: "2026-Present",
+    title: "Machine Learning & NLP Research Assistant",
     organization: "McMaster University",
     tech: ["NLP", "Machine Learning", "Python", "Adapters", "Qwen"],
-    description: "NLP Research Assistant for the McMaster Engineering Department",
+    description: "Exploring Computational Modeling of Narrative Identity. Fine tuned models to explore perspectivism in NLP to model annotator disagreements ",
     src: "/mcmaster-enginering.png",
     type: "image",
     tagClass: "bg-sky-light text-sky-600 border-sky",
