@@ -43,7 +43,8 @@ export default function About() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, delay: 0.05, ease: "easeOut" }}
           className="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium leading-[1.3] tracking-tight text-text-primary max-w-4xl mb-16"
-        >
+        > 
+          Currently, researching ML and NLP for Computational Social Science. {" "}
           In the past, I improved and automated internal workflows and infrastructure at {" "}
           <span className="text-lavender-dark">
             RBC
@@ -113,7 +114,7 @@ export default function About() {
                   </p>
                   {/* Update year below */}
                   <p className="text-xs text-text-muted mt-1">
-                    Expected 2027 · Hamilton, ON
+                    Expected May 2027 · Hamilton, ON
                   </p>
                 </div>
               </div>

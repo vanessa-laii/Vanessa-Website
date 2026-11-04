@@ -50,7 +50,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="mb-6 text-sm font-medium tracking-widest uppercase text-lavender-dark">
-              Software Engineer & Designer
+              Software Engineer & Researcher
             </p>
           </motion.div>
 

@@ -19,19 +19,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "SCEMAS",
-    description:
-      "A real-time urban environmental monitoring system built on a PAC architecture, featuring an operator dashboard with live sensor data aggregation and zone-based alerts, role-based access for administrators, a public REST API exposing non-sensitive city-zone data, and a companion mobile app. Implements audit logging and rate-limiting to ensure accountability and high uptime.",
-    tech: ["PAC Architecture", "Expo", "FastAPI", "Supabase", "Docker"],
-    github: "https://github.com/vanessa-laii/SCEMAS",
-    demo: "https://3a04t01group4.vercel.app",
-    videoSrc: "/SCEMAS.mp4",
-    gradient: "linear-gradient(145deg, #7dd3fc 0%, #0ea5e9 55%, #0284c7 100%)",
-    shimmer:
-      "linear-gradient(135deg, #38bdf8 0%, #0284c7 25%, #0369a1 50%, #0ea5e9 75%, #38bdf8 100%)",
-    tagColor: "bg-sky-light text-blue-700 border-sky",
-  },
-  {
     title: "MindFill • DeltaHacks XII",
     description:
       "An AI-driven therapeutic web colouring book that transforms personal photos into adaptive colouring templates using computer vision for edge detection. Features real-time biometric analysis tracking mouse movements and page interactions to monitor common dementia symptoms for clinical reporting.",
@@ -45,17 +32,30 @@ const projects: Project[] = [
     tagColor: "bg-mint-light text-green-700 border-mint",
   },
   {
-    title: "Image Processing Neural Network",
+    title: "SCEMAS",
     description:
-      "Full-stack interactive showcase of two CNNs trained on the SVHN dataset — a digit classifier (82.1% test accuracy) and an encoder-decoder image denoiser (MSE 0.0088). Features drag-and-drop live inference, interactive training charts, and a layer-by-layer architecture viewer.",
-    tech: ["PyTorch", "FastAPI", "React", "Python", "Vite"],
-    github: "https://github.com/vanessa-laii/Image-Processing-with-NN",
-    videoSrc: "/ImageProcessor.mp4",
-    gradient: "linear-gradient(145deg, #fdba74 0%, #f97316 55%, #ea580c 100%)",
+      "A real-time urban environmental monitoring system built on a PAC architecture, featuring an operator dashboard with live sensor data aggregation and zone-based alerts, role-based access for administrators, a public REST API exposing non-sensitive city-zone data, and a companion mobile app. Implements audit logging and rate-limiting to ensure accountability and high uptime.",
+    tech: ["PAC Architecture", "Expo", "FastAPI", "Supabase", "Docker"],
+    github: "https://github.com/vanessa-laii/SCEMAS",
+    demo: "https://3a04t01group4.vercel.app",
+    videoSrc: "/SCEMAS.mp4",
+    gradient: "linear-gradient(145deg, #7dd3fc 0%, #0ea5e9 55%, #0284c7 100%)",
     shimmer:
-      "linear-gradient(135deg, #fb923c 0%, #ea580c 25%, #c2410c 50%, #f97316 75%, #fb923c 100%)",
-    tagColor: "bg-peach-light text-orange-700 border-peach",
+      "linear-gradient(135deg, #38bdf8 0%, #0284c7 25%, #0369a1 50%, #0ea5e9 75%, #38bdf8 100%)",
+    tagColor: "bg-sky-light text-blue-700 border-sky",
   },
+  // {
+  //   title: "Image Processing Neural Network",
+  //   description:
+  //     "Full-stack interactive showcase of two CNNs trained on the SVHN dataset — a digit classifier (82.1% test accuracy) and an encoder-decoder image denoiser (MSE 0.0088). Features drag-and-drop live inference, interactive training charts, and a layer-by-layer architecture viewer.",
+  //   tech: ["PyTorch", "FastAPI", "React", "Python", "Vite"],
+  //   github: "https://github.com/vanessa-laii/Image-Processing-with-NN",
+  //   videoSrc: "/ImageProcessor.mp4",
+  //   gradient: "linear-gradient(145deg, #fdba74 0%, #f97316 55%, #ea580c 100%)",
+  //   shimmer:
+  //     "linear-gradient(135deg, #fb923c 0%, #ea580c 25%, #c2410c 50%, #f97316 75%, #fb923c 100%)",
+  //   tagColor: "bg-peach-light text-orange-700 border-peach",
+  // },
   {
     title: "BizConnect • 1st Place @ DeltaHacks IX",
     description:
@@ -68,7 +68,7 @@ const projects: Project[] = [
     shimmer:
       "linear-gradient(135deg, #a78bfa 0%, #6d28d9 25%, #4c1d95 50%, #7c3aed 75%, #a78bfa 100%)",
     tagColor: "bg-lavender-light text-lavender-dark border-lavender",
-  },
+  }
 ];
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
