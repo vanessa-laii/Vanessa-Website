@@ -19,6 +19,19 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Revisit",
+    description: "Visualizer and storytelling of how cities have changed over decades, using NASA API and ElevenLabs to generate audio and video.",
+    tech: ["NASA API, Gemini API, ElevenLabs, Exa.AI, Python, React, Next.js"],
+    github: "https://github.com/vanessa-laii/Hack-The-Nest",
+    demo: "https://revisit-earth.vercel.app/",
+    videoSrc: "/revisit.mp4",
+    imageSrc: "/revisit.png",
+    gradient: "linear-gradient(145deg, #c4b5fd 0%, #7c3aed 55%, #4c1d95 100%)",
+    shimmer:
+      "linear-gradient(135deg, #a78bfa 0%, #6d28d9 25%, #4c1d95 50%, #7c3aed 75%, #a78bfa 100%)",
+    tagColor: "bg-lavender-light text-lavender-dark border-lavender",
+  },
+  {
     title: "MindFill • DeltaHacks XII",
     description:
       "An AI-driven therapeutic web colouring book that transforms personal photos into adaptive colouring templates using computer vision for edge detection. Features real-time biometric analysis tracking mouse movements and page interactions to monitor common dementia symptoms for clinical reporting.",
